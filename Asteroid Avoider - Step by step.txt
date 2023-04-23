@@ -1,0 +1,15 @@
+Create new project - 2D URP
+Package manager:
+	- Input system (click Yes when asked to enable)
+Game view -> Simulator
+
+Simulate touch input:
+	- Window -> Analysis -> Input debugger: 
+		Options -> Simulate touch input from mouse or pen
+Download asset from Unity Store:
+	- Star Sparrow Modular Spaceship
+	- Click "Open in unity" after adding asset
+	- Download it in package manager
+	- Import -> Uncheck Readme, Scenes and Substance Painter
+	- Look at materials, they're all pink. Need to be converted to URP
+		- Edit -> Rendering -> Materials -> Convert built-in materials to URP
