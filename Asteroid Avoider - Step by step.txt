@@ -13,3 +13,56 @@ Download asset from Unity Store:
 	- Import -> Uncheck Readme, Scenes and Substance Painter
 	- Look at materials, they're all pink. Need to be converted to URP
 		- Edit -> Rendering -> Materials -> Convert built-in materials to URP
+		
+Processing input:
+	- Set up camera:
+		- Reset transformation
+		- Orthographic
+		
+Player:
+	- Empty object - Player. Reset transformation.
+	- Drag in Sparrow1 prefab as a child
+	- Change camera Z position to -10 in order to look at the player at (0,0,0)
+	- Rotate -90 around X axis in order to see ship from the top in 2D
+	- Scale by 0.1
+
+Change background:
+	- On main camera -> Environment:
+		- Type: Solid colour
+		
+Processing input:
+	- New script, PlayerMovement
+	- Attach to Player
+	- Check if we're touching the screen:
+	
+        if (Touchscreen.current.primaryTouch.press.isPressed)
+        {
+            Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            Debug.Log(touchPos);
+
+            Vector3 worldPosition = m_mainCamera.ScreenToWorldPoint(touchPos);
+            Debug.Log(worldPosition);            
+        }
+		
+		or 
+		
+		using UnityEngine.InputSystem.EnhancedTouch;
+		using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+
+        if (Touch.activeTouches.Count > 0)
+        {
+            Debug.Log(Touch.activeTouches[0].screenPosition);
+            Vector3 worldPosition = m_mainCamera.ScreenToWorldPoint(Touch.activeTouches[0].screenPosition);
+            Debug.Log(worldPosition);
+        }
+		
+Spaceship movement:
+	- Add RigidBody. Uncheck "use gravity"
+	- Get ref to RigidBody in script:
+		- m_rigidBody = GetComponent<Rigidbody>();
+	- Update: Set m_movementDirection based on touch input
+	- FixedUpdate: Add force:
+		m_rigidBody.AddForce(m_movementDirection * m_forceMagnitude, ForceMode.Force);
+	
+Screen wraparound:
+	- 
