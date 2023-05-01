@@ -103,3 +103,55 @@ Asteroid spawner
 
 	- Destroy asteroid when it leaves the screen: OnBecameInvisible
 	
+Game Over
+	- Create new Scene, MainMenu, by duplicating the current one
+	- Create empty game object, MainMenu
+	- Create child canvas. Scale with screen size
+	- Add title text
+		- Anchor top (press shift + alt)
+		- Increase font size
+		- Increase Rect Transform Y
+		- Center it
+	- New button (Start Game). Anchor from bottom
+	- Build settings: Make sure both scenes are in the list
+	- New script, MainMenu
+		public void StartGame()
+		{
+			SceneManager.LoadScene(1);
+		}	
+	- Connect play button with StartGame function
+	- Click on EventSystem object: Click replace with InputSystemUIInputModule
+	- Activate Game scene:
+		- New game object: GameOverHandler
+		- Add child canvas. Scale with screen size
+		- Add image (UI -> Image).
+			- Set image anchors to cover most of the screen. Reset rect.
+		- Create child of image of background image.
+			- Set anchor preset: Stretch
+			- Adjust left, top, right, bottom to set margin against owner image
+		- Create text
+		
+	- New script: GameOverHandler. Methods for play again and return to menu
+	- Deactivate canvas, it's only to be displayed when the game ends
+		- GameOverHandler: EndGame
+		
+Score system:
+	- New game object: ScoreSystem'
+	- Create child canvas. Scale with screen size
+		- Graphic Raycaster can be removed, since we're not interacting with the canvas
+		- Add text
+		- Align at top: Anchors - shift+alt click top
+	- New script: ScoreSystem
+	
+		void Update()
+		{
+			m_score += Time.deltaTime * m_scoreMultiplier;
+			m_scoreText.text = Mathf.FloorToInt(m_score).ToString();
+		}	
+		
+	- Make sure score count stops when game is over
+        m_scoreSystem.OnEndGame();
+		
+	- Display score:
+        m_gameOverText.text = $"GAME OVER\nScore: {m_scoreSystem.GetScore()}";        
+		
