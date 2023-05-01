@@ -74,3 +74,32 @@ Spaceship rotation
         Quaternion targetRotation = Quaternion.LookRotation(m_rigidBody.velocity, Vector3.back);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
 
+Asteroids
+	- Get red asteroid prefab from downloaded asset
+		- Insert and prefab into our own prefabs (keep original)
+		- Delete collider that comes with the asset
+		- Add capsule collider, trigger
+		- Add RigidBody, no gravity
+	- Add scripts, Asteroid and PlayerHealth
+	- On Player prefab:
+		- Remove all colliders
+		- Add mesh collider, convex, trigger
+	- Get blue asteroid prefab.
+		- Prefab into our own prefabs (keep original)
+		- Delete collider, add sphere collider
+
+Starfield
+	- Effects -> Particle System
+	- Place left of camera
+	- Shape: Box, scale Y, randomize direction
+	- Emission
+	- Start 
+	- Check "Prewarm" so that it fill the screen from the start
+	
+Asteroid spawner
+	- New script and game object, AsteroidSpawner
+	
+		GameObject asteroidInstance = Instantiate(selectedAsteroid, worldSpawnPoint, Quaternion.Euler(0, 0, Random.Range(0, 360)));
+
+	- Destroy asteroid when it leaves the screen: OnBecameInvisible
+	
