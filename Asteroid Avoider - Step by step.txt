@@ -65,4 +65,12 @@ Spaceship movement:
 		m_rigidBody.AddForce(m_movementDirection * m_forceMagnitude, ForceMode.Force);
 	
 Screen wraparound:
-	- 
+	- Vector3 viewportPos = m_mainCamera.WorldToViewportPoint(transform.position);
+        if (viewportPos.x > 1)
+            newPosition.x = -newPosition.x + 0.1f;
+
+Spaceship rotation
+	- Rotate according to velocity vector:
+        Quaternion targetRotation = Quaternion.LookRotation(m_rigidBody.velocity, Vector3.back);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
+
