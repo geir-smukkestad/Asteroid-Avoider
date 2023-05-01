@@ -154,4 +154,43 @@ Score system:
 		
 	- Display score:
         m_gameOverText.text = $"GAME OVER\nScore: {m_scoreSystem.GetScore()}";        
+
+Mobile profiling
+	- Window -> Analysis -> Profiler
+	- Dock it
+	- Enable "deep profile"
+	- Select "hierarchy" on bottom left (as opposed to timeline)
+	- Enable recording
+	- Start game
+	- How to enable on Android: Build settings -> Android: Check "Development build", "autoconnect profiler" and "deep profiling support"
+	- Tip: We should have at least 30 fps
+	
+Publishing preparation (Android)
+	- Google Play Console website
+	- Need a developer account. One time fee of 25$
+	
+App Store preparation
+	- developer.apple.com
+	- Become Apple developer
+	- Register App id
+	- Bundle identifier: See Project Settings -> Player -> Identification: Package name
+	- Generate certificate via Keychain Access on Mac
+		- Create a new certificate: iOS Distribution (App store and ad hoc)
+	- Also need to add a profile:
+		- Select App Store
+		- Select the app id
+		- Select certificate
+		- Download the provisioning profile
+	- App Store Connect
+		- New App
 		
+	- Also check https://clearbridgemobile.com/how-to-submit-an-app-to-the-app-store/
+	
+In-app purchases
+	- Click the Cloud icon on the toolbar. Select In-app purchases in the docked pane
+	- Add button to canvas
+		- On the button: Add "IAP button" component
+		- IAP Catalog: Can add product here
+			- Type: Consumable (e.g. coins), non-consumable (e.g. new skin, unlock something that you will own), subscription
+			- Select price
+		- Check "automatically initialize Unity purchasing"
